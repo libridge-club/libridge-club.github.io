@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 	
 	<url>
-		<loc>https://blog.libridge.club/blog/post-2024-09-02/post/</loc>
+		<loc>https://blog.libridge.club/blog/2024-09-02%20-%20first%20post/post/</loc>
 		<lastmod>2024-09-02</lastmod>
 	</url>
 	
@@ -47,12 +47,17 @@
 	</url>
 	
 	<url>
-		<loc>https://blog.libridge.club/tags/rulojuka/</loc>
+		<loc>https://blog.libridge.club/tags/software-development/</loc>
 		<lastmod>2024-09-02</lastmod>
 	</url>
 	
 	<url>
-		<loc>https://blog.libridge.club/tags/libridge/</loc>
+		<loc>https://blog.libridge.club/tags/java/</loc>
+		<lastmod>2024-09-02</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://blog.libridge.club/tags/scala/</loc>
 		<lastmod>2024-09-02</lastmod>
 	</url>
 	
@@ -63,6 +68,11 @@
 	
 	<url>
 		<loc>https://blog.libridge.club/tags/non-programming/</loc>
+		<lastmod>2024-09-02</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://blog.libridge.club/tags/podcast/</loc>
 		<lastmod>2024-09-02</lastmod>
 	</url>
 </urlset>

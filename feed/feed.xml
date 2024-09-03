@@ -13,9 +13,9 @@
 	
 	<entry>
 		<title>First post</title>
-		<link href="https://blog.libridge.club/blog/post-2024-09-02/post/"/>
+		<link href="https://blog.libridge.club/blog/2024-09-02%20-%20first%20post/post/"/>
 		<updated>2024-09-02T00:00:00Z</updated>
-		<id>https://blog.libridge.club/blog/post-2024-09-02/post/</id>
+		<id>https://blog.libridge.club/blog/2024-09-02%20-%20first%20post/post/</id>
 		<content type="html">&lt;p&gt;Today we start the libridge blog with the &lt;a href=&quot;https://blog.libridge.club/about/&quot;&gt;about section&lt;/a&gt;. This is a project guideline that was in my head for a long time, but now it is written down and available to the public.&lt;/p&gt;
 &lt;p&gt;Other than writing the &lt;em&gt;about&lt;/em&gt; section, I went through some technical work:&lt;/p&gt;
 &lt;ol&gt;
@@ -28,20 +28,20 @@
 &lt;p&gt;This post also serves as a reminder (mostly to myself) that there will be a lot of work to do, even for those tasks that might sound simple like a blog post but it will be worth it if we achieve the result we declared in the &lt;a href=&quot;https://blog.libridge.club/about/&quot;&gt;about section&lt;/a&gt;.&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;P.S.: The section will surely be updated in the future, but this is the original text:&lt;/p&gt;
-&lt;h1 id=&quot;about-libridge&quot; tabindex=&quot;-1&quot;&gt;About libridge &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/post-2024-09-02/post/&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
-&lt;h2 id=&quot;libridge-is-an-online-bridge-server&quot; tabindex=&quot;-1&quot;&gt;Libridge is an online Bridge server. &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/post-2024-09-02/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h1 id=&quot;about-libridge&quot; tabindex=&quot;-1&quot;&gt;About libridge &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/2024-09-02%20-%20first%20post/post/&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id=&quot;libridge-is-an-online-bridge-server&quot; tabindex=&quot;-1&quot;&gt;Libridge is an online Bridge server. &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/2024-09-02%20-%20first%20post/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;This is roughly an online equivalent of a physical Bridge club. You can play bridge there, but this is not the only thing available. There should be also other things, from having a friendly discussion about the bidding of some hand, to organizing a tournament with thousands of players.
 Like Bridge clubs around the world, libridge is also a community. It is a place to be, to make friends, to engage with other people with one thing in common: Bridge.&lt;/p&gt;
-&lt;h2 id=&quot;libridge-is-free&quot; tabindex=&quot;-1&quot;&gt;Libridge is free &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/post-2024-09-02/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;libridge-is-free&quot; tabindex=&quot;-1&quot;&gt;Libridge is free &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/2024-09-02%20-%20first%20post/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Free as in free of cost and, most importantly, as in free of limitations. The instructions to create libridge (its source code) are available for everyone to use, read, learn and contribute with the only reservation that you must not make it &amp;quot;unfree&amp;quot; for other people. This aims to provide the bridge server as &amp;quot;commons&amp;quot; for anyone to enjoy it anyway they want.&lt;/p&gt;
-&lt;h2 id=&quot;libridge-is-ad-free-and-track-free&quot; tabindex=&quot;-1&quot;&gt;Libridge is ad-free and track-free &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/post-2024-09-02/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;libridge-is-ad-free-and-track-free&quot; tabindex=&quot;-1&quot;&gt;Libridge is ad-free and track-free &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/2024-09-02%20-%20first%20post/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Ads do not benefit the user in any way. In fact, they track us while using a lot of screen space, bandwidth and power in the process.
 Libridge does not expose you to ads and will not sell any data for any company willing to buy it.&lt;/p&gt;
-&lt;h2 id=&quot;libridge-is-made-for-the-users&quot; tabindex=&quot;-1&quot;&gt;Libridge is made for the users &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/post-2024-09-02/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;libridge-is-made-for-the-users&quot; tabindex=&quot;-1&quot;&gt;Libridge is made for the users &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/2024-09-02%20-%20first%20post/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The whole point of libridge existing is its own users. Without real people having a good time, connecting with others and learning about our beloved game, this would be pointless. That is why all the users have complete access to every feature of the site.&lt;/p&gt;
-&lt;h2 id=&quot;libridge-is-funded-by-its-own-community&quot; tabindex=&quot;-1&quot;&gt;Libridge is funded by its own community &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/post-2024-09-02/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;libridge-is-funded-by-its-own-community&quot; tabindex=&quot;-1&quot;&gt;Libridge is funded by its own community &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/2024-09-02%20-%20first%20post/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Libridge is funded by the developers who choose to contribute with their work and by the users who choose to provide income to the site and become patrons. Patrons will have a neat icon beside their username for bragging rights.&lt;/p&gt;
-&lt;h2 id=&quot;libridge-aims-to-go-beyond-the-online-environment&quot; tabindex=&quot;-1&quot;&gt;Libridge aims to go beyond the online environment &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/post-2024-09-02/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;libridge-aims-to-go-beyond-the-online-environment&quot; tabindex=&quot;-1&quot;&gt;Libridge aims to go beyond the online environment &lt;a class=&quot;header-anchor&quot; href=&quot;https://blog.libridge.club/blog/2024-09-02%20-%20first%20post/post/&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Libridge will also focus some of its efforts in tangible, physical works such as bringing Bridge to new locations or with its tools being used in physical tournaments.&lt;/p&gt;
 </content>
 	</entry>
