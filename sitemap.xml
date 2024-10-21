@@ -7,72 +7,102 @@
 	</url>
 	
 	<url>
+		<loc>https://blog.libridge.club/blog/2024-09-16%20-%20scala%20migration/post/</loc>
+		<lastmod>2024-10-21</lastmod>
+	</url>
+	
+	<url>
 		<loc>https://blog.libridge.club/about/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://blog.libridge.club/blog/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://blog.libridge.club/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://blog.libridge.club/tags/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://blog.libridge.club/tags/another-tag/</loc>
-		<lastmod>2024-09-02</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://blog.libridge.club/tags/number-2/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://blog.libridge.club/tags/second-tag/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://blog.libridge.club/tags/posts-with-two-tags/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 	
 	<url>
-		<loc>https://blog.libridge.club/tags/software-development/</loc>
-		<lastmod>2024-09-02</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://blog.libridge.club/tags/java/</loc>
-		<lastmod>2024-09-02</lastmod>
-	</url>
-	
-	<url>
-		<loc>https://blog.libridge.club/tags/scala/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<loc>https://blog.libridge.club/tags/number-2/</loc>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://blog.libridge.club/tags/community/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://blog.libridge.club/tags/non-programming/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://blog.libridge.club/tags/podcast/</loc>
-		<lastmod>2024-09-02</lastmod>
+		<lastmod>2024-10-21</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://blog.libridge.club/tags/software-development/</loc>
+		<lastmod>2024-10-21</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://blog.libridge.club/tags/java/</loc>
+		<lastmod>2024-10-21</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://blog.libridge.club/tags/scala/</loc>
+		<lastmod>2024-10-21</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://blog.libridge.club/tags/functional-programming/</loc>
+		<lastmod>2024-10-21</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://blog.libridge.club/tags/chess/</loc>
+		<lastmod>2024-10-21</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://blog.libridge.club/tags/bridge/</loc>
+		<lastmod>2024-10-21</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://blog.libridge.club/tags/lichess/</loc>
+		<lastmod>2024-10-21</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://blog.libridge.club/tags/libridge/</loc>
+		<lastmod>2024-10-21</lastmod>
 	</url>
 </urlset>

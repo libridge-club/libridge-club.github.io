@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>migrating from java to scala</title>
+		<title>Migrating from java to scala</title>
 		<meta name="description" content="Blog for https://libridge.club/">
 		<link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="libridge blog">
 		<link rel="alternate" href="/feed/feed.json" type="application/json" title="libridge blog">
@@ -465,24 +465,95 @@ h2 + .header-anchor {
 
 		<main id="skip">
 			
-<h1>migrating from java to scala</h1>
+<h1>Migrating from java to scala</h1>
 
 <ul class="post-metadata">
-	<li><time datetime="2024-09-16">16 September 2024</time></li>
+	<li><time datetime="2024-10-21">21 October 2024</time></li>
 	<li><a href="/tags/software-development/" class="post-tag">software development</a>, </li>
 	<li><a href="/tags/java/" class="post-tag">java</a>, </li>
-	<li><a href="/tags/scala/" class="post-tag">scala</a></li>
+	<li><a href="/tags/scala/" class="post-tag">scala</a>, </li>
+	<li><a href="/tags/functional-programming/" class="post-tag">functional programming</a>, </li>
+	<li><a href="/tags/chess/" class="post-tag">chess</a>, </li>
+	<li><a href="/tags/bridge/" class="post-tag">bridge</a>, </li>
+	<li><a href="/tags/lichess/" class="post-tag">lichess</a>, </li>
+	<li><a href="/tags/libridge/" class="post-tag">libridge</a></li>
 </ul>
 
-<p>Text about scala migration</p>
+<h1 id="libridge-and-its-ongoing-migration-from-java-to-scala" tabindex="-1">Libridge and its ongoing migration from java to scala <a class="header-anchor" href="#libridge-and-its-ongoing-migration-from-java-to-scala">#</a></h1>
+<h2 id="inspiration-by-lichess" tabindex="-1">Inspiration by lichess <a class="header-anchor" href="#inspiration-by-lichess">#</a></h2>
+<p>lichess is an inspiration in many ways. The technical part is one of them.</p>
+<p>lichess's creator, thibault, have an <a href="https://lichess.org/@/thibault/blog/starting-from-scratch/NITT84rC">interesting article</a> about the choices made during the 10 years he has been working on lichess and what he would do differently if he had the chance:</p>
+<p>The description of the repository really caught my eye:
+&quot;Chess API written in scala. Immutable and free of side effects.&quot; - <a href="https://github.com/lichess-org/scalachess">scalachess</a></p>
+<p>After studying and practicing a lot of Functional Programming, I decided libridge should be (in its core) &quot;Immutable and free of side effects.&quot; too.</p>
+<h2 id="the-chess-and-bridge-card-game-domain" tabindex="-1">The Chess and Bridge card game domain <a class="header-anchor" href="#the-chess-and-bridge-card-game-domain">#</a></h2>
+<p>It turns out that the rules of Chess are very well established, the last rule change with real impact in every day game, like <em>en passant</em> or <em>pawn promotions</em> were cemented centuries ago. In fact, go to the <a href="https://github.com/lichess-org/scalachess">scalachess</a> repository and check the number of open issues and recent features and you will see a number very close to zero for this exact same reason.
+Contrast this with the game server <a href="https://github.com/lichess-org/lila">lila</a> and you will see a huge difference.</p>
+<p>It turns out that the rules of Bridge (officially called the *Laws of Bridge&quot;) are also pretty established. Its time period is in the order of decades, not centuries, but is is very rarely changing nonetheless. This creates a domain where values like correctness and performance are more important than values like readability or maintainability.</p>
+<h2 id="my-personal-quest-in-functional-programming" tabindex="-1">My personal quest in Functional Programming <a class="header-anchor" href="#my-personal-quest-in-functional-programming">#</a></h2>
+<p>Since I got to know FP some years ago, I found it very interesting and started studying and practicing it when possible. As libridge was always in my mind during this quest, I obviously started seeing the possibilities in this domain. &quot;Hmm, cards in a deck are really something immutable&quot;, &quot;Does the <em>PASS</em> card in all of the bidding boxes represent the same thing?&quot;, &quot;After a hand is played, will I ever want to change it in any way? If so, should I update it in place or add a <em>correction</em> event?&quot;</p>
+<h2 id="singletons" tabindex="-1">Singletons <a class="header-anchor" href="#singletons">#</a></h2>
+<p>In OOP we are usually thought that singletons are evil. This may at first glance be explained because the singleton abstraction itself is not a good abstraction but that is not the case. It is frowned upon because of modularity. When you define a Singleton for, lets say, an object that represents a database state, you will have difficulties when you try to test its interface, because you will have to substitute this object for another one with the same interface but different implementation. It turns out that when the Singleton is easily constructable, it bears no problem at all for testing if we just construct it every time the application runs. In fact, in Scala, as the <code>three of diamonds</code> is an instance of a case class: if it is needed during the application, it will only be constructed once, and every other invocation of the Card(three, diamonds) will provide a reference to the same object.</p>
+<p>One other problem is the lack of encapsulation/control. A Singleton in Java is basically a global variable. But it is here that we find another source of confusion. The problem is not that it is a <strong>global</strong> variable. The problem is that it is a global <strong>variable</strong>. It turns out that the <code>three of diamonds</code> is <strong>supposed</strong> to be global in this domain. The problem arises when someone else can take this <code>three of diamonds</code> and change it into a <code>jack of hearts</code>. That brings us to immutability.</p>
+<h2 id="immutability" tabindex="-1">Immutability <a class="header-anchor" href="#immutability">#</a></h2>
+<p>The canonical example for this part is using date objects, but I will stick to the <code>three of diamonds</code> example here. So we have a Card(three,diamonds) that creates only and only one <code>three of diamonds</code> in memory, and after that, distributes references to every code that asks for it again. So, the problem that may happen is: what happens when someone changes the object, or even corrupt it in some way? We can think about overwriting the reference with a reference to another object, or calling a method that mutates its state (something like <code>threeOfDiamonds.changeSuit(hearts)</code>). What happens then?</p>
+<p>The scala way is that... It doesn't. By default, what is expected from Scala objects when you call this kind of method on it, is that it <strong>returns a new object (cloned from the original) with the expected mutation</strong> and changes absolutely nothing in the first object. In fact, an object created from a <code>case class</code> is uniquely defined by its creation parameters (in this case, its <code>rank</code> and <code>suit</code>), so any <code>Card(three,diamonds)</code> not only returns the same <code>.hashCode</code> and true for <code>.equals(Card(three,diamonds))</code> equality, but also returns true for <code>==</code> equality, as it literally points to the same memory reference.
+So, if you want to use the result of a mutation method like the <code>changeSuit</code> example, you would need to attribute the return value of the method to another value, and continue from there:</p>
+<pre class="language-scala" tabindex="0"><code class="language-scala"><span class="token comment">// Remembering that the changeSuit method does not make sense in this domain</span>
+<span class="token comment">// but it would work like this if it existed:</span>
+<span class="token keyword">val</span> otherCard<span class="token operator">:</span> Card <span class="token operator">=</span> threeOfDiamonds<span class="token punctuation">.</span>changeSuit<span class="token punctuation">(</span>hearts<span class="token punctuation">)</span>
+println<span class="token punctuation">(</span>threeOfDiamonds<span class="token punctuation">)</span> <span class="token comment">// Card(three,diamonds)</span>
+println<span class="token punctuation">(</span>otherCard<span class="token punctuation">)</span> <span class="token comment">// Card(three,hearts)</span></code></pre>
+<h2 id="auditability" tabindex="-1">Auditability? <a class="header-anchor" href="#auditability">#</a></h2>
+<p>Previous versions of the &quot;undo&quot; feature worked by updating the state of the hands to change the cards that were played, move them back from the table to the hands, etc. This would inevitably lose information on what happened, like, what was the original card that was played? This is usually very important when this kind of event happens in a physical table, I figured it would be at least as important in an online match.
+So, during the quest I started to see this feature (and many others) as a derivation of a List of events, not as a state of an object.
+Imagine something like:</p>
+<pre><code>...
+North played the three of diamonds
+North asked for an undo
+West allowed the undo
+East allowed the undo
+North played the jack of hearts
+</code></pre>
+<p>So, we record this <code>CardPlay</code> as a list of Events, and when we need to show the state - imagine the cards in a player's hand - we calculate its derivation. Calculating the <em>current Hand of a player</em> from a list of events is pretty simple and fast, but even if that becomes a bottleneck in the future, it could easily be improved: using hashes for intermediate calculated derivations is one that comes to mind.</p>
+<p>This is not a new idea, in fact, I had already been introduced to it by Bruno Castanho and Kaique Vieira in a previous job. It is called <em>Event Sourcing</em>, and the derived state in a specific time is called a <em>Projection</em>. At the time, I saw the potential of the idea, but it took me years for me to see this specific implementation and the value it brings.</p>
+<p>One extra feature for using this, is that we can add timestamps to each of the events, and have a complete log for every hand played in the game. This would be excellent to help with cheat prevention and also to create statistics on the time that players spent thinking in each decision of the game. This could start in the auction and card play but can go all the way up to browser interactions.</p>
+<pre><code>...
+100s North played the three of diamonds
+102s North moved the focus to another tab of the browser
+105s North moved the focus back to the game tab of the browser
+106s North asked for an undo
+110s West allowed the undo
+111s East allowed the undo
+112s North played the jack of hearts
+</code></pre>
+<p>This is a simple example that would be helpful for a tournament director to rule on a <em>foul play</em> claim. In a real life example, we could have timestamps in the orders of milliseconds, and the mere change in tempo of a decision - lets say a hard decision that took less time than usual - could be helpful to catch cheaters. Multiply that for many hands in a tournament, and compare it to the time it took for all other players to make that same decision and you can see why it would be very useful to have a complete, unadulterated history of every single event in the table.</p>
+<p>Add that to the fact that Bridge is a game played one Hand at a time, and you will have records that are very small - lets say less than a thousand events for one hand - and yet contain every information ever created. Also, as this information is not needed in real time, you can just store it away, and process it when it is feasible to do so. This way you free your runtime memory without losing any information whatsoever.</p>
+<h2 id="value-oriented-programming-vs-place-oriented-programming" tabindex="-1">Value Oriented Programming vs Place Oriented Programming <a class="header-anchor" href="#value-oriented-programming-vs-place-oriented-programming">#</a></h2>
+<p><a href="https://www.youtube.com/watch?v=-6BsiVyC1kM">This</a> <a href="https://www.youtube.com/watch?v=-I-VpPMzG7c">talk</a> from Rich Hickey was probably the one that made the largest amount of functional programming ideas in my head solidify into a good understanding of the paradigm. In summary, the idea of Value Oriented Programming means that we should shift our abstraction from &quot;a place that holds the information&quot; to &quot;the information itself&quot;. The complete reasoning and motives are available in the talk, but I can assure that, even if you don't end up using it, it will change the way you think about storage/memory in programming.</p>
+<h2 id="in-conclusion-so-what-java-can-do-all-that" tabindex="-1">In conclusion: So what? Java can do all that... <a class="header-anchor" href="#in-conclusion-so-what-java-can-do-all-that">#</a></h2>
+<p>Yes, it does. But it is not made for it. Let's compare these two versions of the <code>Hand</code> class. In the first one I tried to force immutability using Java. In the second one I used scala's built-in capabilities.</p>
+<p>Take a look at this snippet of code from <a href="https://github.com/libridge-club/libridge-backend/commit/6096a85b8cae8ff434df3883f87203a986eac4c5#diff-073a4a7f7af26ea802771e4cddf93f3c84a5750afc02d294a255c8f060020bcdR49">libridge-backend</a></p>
+<pre class="language-java" tabindex="0"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">Hand</span> <span class="token function">addCard</span><span class="token punctuation">(</span><span class="token class-name">Card</span> card<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Card</span><span class="token punctuation">></span></span> newCardsList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Card</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>cards<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  newCardsList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>card<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Hand</span><span class="token punctuation">(</span>newCardsList<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>playedCards<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>and then compare it to the equivalent code in <a href="https://github.com/libridge-club/scalabridge/commit/a9d564ef03c4576f65b717052e10eb00e03783b3#diff-7fd352f9c4d3d279398d96d0f7bbd2fb94168074f1d871d485ffd768b2088d10R21">scalabridge</a></p>
+<pre class="language-scala" tabindex="0"><code class="language-scala"><span class="token keyword">def</span> addCard<span class="token punctuation">(</span>card<span class="token operator">:</span> Card<span class="token punctuation">)</span><span class="token operator">:</span> Hand <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>copy<span class="token punctuation">(</span>allCards <span class="token operator">=</span> allCards <span class="token operator">+</span> card<span class="token punctuation">)</span></code></pre>
+<p>We can clearly see that the scala code is better in almost any metric you can imagine. It is shorter, it is more readable, is is simpler (as opposed to complex), it is easier to verify its correctness, you don't have to worry that you forgot something and there is a hole in the shell so a client could mutate your object. In short, it reduces your cognitive complexity: it makes you have to think less.
+You may add a criticism that scala (and functional programming) is less widespread and would have more difficulty of being understood because of that, but this is the only thing I can imagine adds to a &quot;con&quot; for the FP code.</p>
+<h3 id="the-rest-of-the-migration" tabindex="-1">The rest of the migration <a class="header-anchor" href="#the-rest-of-the-migration">#</a></h3>
+<p>Libridge has thousands of lines of java code and the incentive to translate it for scala is not really there for all of them. The most valuable candidates have already been migrated to scalabridge, and it will continue for a while, specially for the <em>core</em> classes. But definitely not for all of the classes. For instance, I intend to keep the classes that <strong>are supposed to be mutating all the time</strong> in Java, not only because Java does it better, but because the code is already there.</p>
+<p>If you got all the way here, chances are you are interested in bridge, in programming or in both. Send me an email at contributing@libridge.club or take a look at <a href="https://github.com/libridge-club/">the code</a> if you would like to contribute to the project.</p>
 
-<ul class="links-nextprev"><li>Previous: <a href="/blog/2024-09-09 - libridge podcast/post/">The libridge podcast premiere</a></li>
+<ul class="links-nextprev"><li>Previous: <a href="/blog/2024-09-02 - first post/post/">First post</a></li>
 </ul>
 
 		</main>
 
 		<footer></footer>
 
-		<!-- This page `/blog/2024-09-16 - scala migration/post/` was built on 2024-09-03T21:16:43.931Z -->
+		<!-- This page `/blog/2024-09-16 - scala migration/post/` was built on 2024-10-21T21:10:00.900Z -->
 	</body>
 </html>
